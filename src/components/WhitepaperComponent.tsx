@@ -395,10 +395,11 @@ const RoadmapContent: React.FC = () => (
         phase: "Phase 1 - Foundation",
         quarter: "Q1 2024",
         items: [
-          "Initial DEX offering on BSC",
-          "Community building initiatives",
-          "Strategic partnership developments",
-          "Marketing campaign launch"
+          "GameFi Integration",
+          "Website Launch",
+          "Community Building",
+          "Smart Contract Development",
+          "Token Presale"
         ]
       },
       {

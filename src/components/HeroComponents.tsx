@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { Twitter, MessageCircle, Github, ExternalLink, Copy, CheckCircle, ArrowUpRight } from 'lucide-react';
+import HyperText from './ui/hyper-text';
+import AnimatedDescription from './AnimatedDescription';
 
 // Type Definitions
 type ChainKey = 'bsc' | 'solana' | 'ton';
@@ -294,19 +296,31 @@ const Hero: React.FC = () => {
           </span>
         </motion.div>
 
-        {/* Title */}
-        <motion.h1
+      {/* Title with Enhanced Gradient and Animation */}
+      <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight 
             tracking-tight bg-gradient-to-r from-orange-400 via-orange-300 to-yellow-400 
-            text-transparent bg-clip-text px-4 sm:px-8 max-w-full"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+            text-transparent bg-clip-text px-4 sm:px-8 max-w-full
+            drop-shadow-[0_0_10px_rgba(251,146,60,0.2)]"
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ 
+            duration: 0.8, 
+            delay: 0.2,
+            ease: "easeOut"
+          }}
         >
           🦂 Scorpion World
         </motion.h1>
 
-        {/* Description */}
+        {/* Description Component with proper spacing */}
+        <div className="mt-2 sm:mt-4">
+          <AnimatedDescription />
+        </div>
+
+
+        
+        {/* Description
         <motion.p
           className="text-lg sm:text-xl md:text-2xl text-blue-100/90 font-medium leading-relaxed
             px-4 sm:px-8 max-w-[90%] sm:max-w-3xl"
@@ -314,9 +328,12 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Unleash the power of <span className="text-orange-400 font-semibold">$SCORP</span>.
-          Earn, trade, and dominate the crypto and telegram ecosystem.
-        </motion.p>
+           
+          Harness the potential of <HyperText
+      className="text-orange-400 font-semibold"
+      text="$SCORP"/>. 
+          Earn, trade, and unlock limitless possibilities in the Web3 and Telegram ecosystem.
+        </motion.p> */}
 
         {/* Smart Contract Section */}
         <motion.div
