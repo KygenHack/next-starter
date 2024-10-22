@@ -393,43 +393,13 @@ const RoadmapContent: React.FC = () => (
     {[
       {
         phase: "Phase 1 - Foundation",
-        quarter: "Q1 2024",
+        quarter: "Q4 2024",
         items: [
           "GameFi Integration",
           "Website Launch",
           "Community Building",
           "Smart Contract Development",
           "Token Presale"
-        ]
-      },
-      {
-        phase: "Phase 2 - Expansion",
-        quarter: "Q2 2024",
-        items: [
-          "Solana bridge deployment",
-          "New exchange listings",
-          "Enhanced security audits",
-          "Ecosystem partnerships"
-        ]
-      },
-      {
-        phase: "Phase 3 - Integration",
-        quarter: "Q3 2024",
-        items: [
-          "TON network integration",
-          "Cross-chain functionality expansion",
-          "Advanced features rollout",
-          "Community governance implementation"
-        ]
-      },
-      {
-        phase: "Phase 4 - Scaling",
-        quarter: "Q4 2024",
-        items: [
-          "Ecosystem expansion",
-          "New product launches",
-          "Enhanced DeFi features",
-          "Global marketing campaign"
         ]
       }
     ].map((phase, index) => (

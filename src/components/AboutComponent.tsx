@@ -14,6 +14,7 @@ import {
   FileText
 } from 'lucide-react';
 import WhitepaperComponent from './WhitepaperComponent';
+import TypingAnimation from './ui/typing-animation';
 
 // Dynamic Background Shapes
 const BackgroundShapes = () => {
@@ -285,14 +286,16 @@ const AboutSection: React.FC = () => {
           </motion.h2>
 
           <motion.p
-            className="text-lg md:text-xl text-blue-100/80 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Scorpion World is a revolution in the crypto space.
-            We combine the fun and excitement of meme culture with serious DeFi capabilities.
+           <TypingAnimation
+           duration={50}
+      className="text-lg md:text-xl text-blue-100/80"
+      text="Scorpion World is a revolution in the crypto space. We combine the fun and excitement of meme culture with serious DeFi capabilities."/>
           </motion.p>
+        
         </div>
 
         {/* Stats Section */}

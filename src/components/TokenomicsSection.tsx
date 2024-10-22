@@ -15,6 +15,7 @@ import {
   Sparkles,
   Check
 } from 'lucide-react';
+import TypingAnimation from './ui/typing-animation';
 
 // Types
 interface TokenomicsDataItem {
@@ -246,7 +247,10 @@ const TokenomicsSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Discover how $SCORP tokens are distributed and their utility within our ecosystem
+            <TypingAnimation
+           duration={50}
+      className="text-lg md:text-xl text-blue-100/80"
+      text=" Discover how $SCORP tokens are distributed and their utility within our ecosystem"/>
           </motion.p>
         </div>
 

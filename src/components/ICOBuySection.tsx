@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowUpRight, Wallet, Clock, CreditCard, HelpCircle, AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import TypingAnimation from './ui/typing-animation';
 
 // Mock data
 const icoData = {
@@ -298,8 +299,11 @@ const ICOBuySection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Be part of the future of DeFi by participating in our token sale.
-            Early supporters get exclusive benefits and community privileges.
+            <TypingAnimation
+           duration={50}
+      className="text-lg md:text-xl text-blue-100/80"
+      text="Be part of the future of DeFi by participating in our token sale. Early supporters get exclusive benefits and community privileges."
+      />
           </motion.p>
         </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, CheckCircle, Clock, Sparkles, Rocket, Target, Flag, Star, Lock, ArrowRight } from 'lucide-react';
+import TypingAnimation from './ui/typing-animation';
 
 interface Milestone {
   title: string;
@@ -355,7 +356,10 @@ const Roadmap: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Follow our journey as we revolutionize the crypto space with $SCORP
+            <TypingAnimation
+           duration={50}
+      className="text-lg md:text-xl text-blue-100/80"
+      text="Follow our journey as we revolutionize the crypto space with $SCORP"/>
           </motion.p>
         </div>
 
