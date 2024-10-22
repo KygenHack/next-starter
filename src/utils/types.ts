@@ -25,3 +25,9 @@ export interface PhaseCardProps {
 export interface StatusBadgeProps {
   status: string;
 }
+
+
+export type IconProps = {
+  size?: number;
+  className?: string;
+}
