@@ -321,7 +321,7 @@ const TokenomicsSection: React.FC = () => {
                 </div>
                 <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
                   <span className="text-orange-400">Network:</span>
-                  <span className="text-blue-100">Binance Smart Chain (BEP-20)</span>
+                  <span className="text-blue-100">Cross Chain (BSC, Solana, TON)</span>
                 </div>
                 <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
                   <span className="text-orange-400">Token Type:</span>
