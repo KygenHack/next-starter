@@ -28,18 +28,18 @@ interface TokenomicsDataItem {
 // Data
 const tokenomicsData: TokenomicsDataItem[] = [
   { 
-    name: 'Public Sale', 
-    value: 20, 
-    color: '#F97316', 
-    description: 'Available for public token sale participants',
-    lockPeriod: 'No Lock'
-  },
-  { 
     name: 'Community Airdrop & Charity', 
-    value: 40, 
+    value: 30, 
     color: '#EC4899',
     description: 'For community incentives and rewards',
     lockPeriod: 'Released per program'
+  },
+  { 
+    name: 'Public Sale', 
+    value: 30, 
+    color: '#F97316', 
+    description: 'Available for public token sale participants',
+    lockPeriod: 'No Lock'
   },
   { 
     name: 'Marketing', 
@@ -299,17 +299,33 @@ const TokenomicsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Key Statistics */}
+              {/* Key Statistics
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                 <div className="bg-blue-950/30 p-4 rounded-xl">
                   <div className="text-sm text-blue-100/70 mb-1">Public Sale Allocation</div>
                   <div className="text-lg font-bold text-orange-400">{publicSaleTokens} $SCORP</div>
-                  <div className="text-sm text-blue-100/70">40% of Total Supply</div>
+                  <div className="text-sm text-blue-100/70">30% of Total Supply</div>
                 </div>
                 <div className="bg-blue-950/30 p-4 rounded-xl">
                   <div className="text-sm text-blue-100/70 mb-1">Liquidity Pool</div>
                   <div className="text-lg font-bold text-orange-400">{liquidityTokens} $SCORP</div>
-                  <div className="text-sm text-blue-100/70">20% of Total Supply</div>
+                  <div className="text-sm text-blue-100/70">10% of Total Supply</div>
+                </div>
+              </div> */}
+
+               {/* Key Stats */}
+               <div className="mt-8 space-y-4">
+                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
+                  <span className="text-orange-400">Total Supply:</span>
+                  <span className="text-blue-100 font-mono">{totalSupply.toLocaleString()} $SCORP</span>
+                </div>
+                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
+                  <span className="text-orange-400">Network:</span>
+                  <span className="text-blue-100">Binance Smart Chain (BEP-20)</span>
+                </div>
+                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
+                  <span className="text-orange-400">Token Type:</span>
+                  <span className="text-blue-100">Utility & Governance</span>
                 </div>
               </div>
 
@@ -370,25 +386,7 @@ const TokenomicsSection: React.FC = () => {
                 ))}
               </div>
 
-              {/* Key Stats */}
-              <div className="mt-8 space-y-4">
-                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
-                  <span className="text-orange-400">Total Supply:</span>
-                  <span className="text-blue-100 font-mono">{totalSupply.toLocaleString()} $SCORP</span>
-                </div>
-                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
-                  <span className="text-orange-400">Initial Market Cap:</span>
-                  <span className="text-blue-100 font-mono">$2,500,000</span>
-                </div>
-                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
-                  <span className="text-orange-400">Network:</span>
-                  <span className="text-blue-100">Binance Smart Chain (BEP-20)</span>
-                </div>
-                <div className="flex justify-between p-4 bg-blue-950/30 rounded-xl">
-                  <span className="text-orange-400">Token Type:</span>
-                  <span className="text-blue-100">Utility & Governance</span>
-                </div>
-              </div>
+             
 
               {/* Additional Info Box */}
               <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">

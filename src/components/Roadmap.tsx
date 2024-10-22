@@ -23,7 +23,7 @@ const roadmapData: RoadmapPhase[] = [
     id: 1,
     title: "Launch Phase",
     emoji: "🚀",
-    status: 'completed',
+    status: 'in-progress',
     period: "Q1 2024",
     icon: Rocket,
     milestones: [
@@ -32,20 +32,21 @@ const roadmapData: RoadmapPhase[] = [
         description: "Launch of official Scorpion World website and social media channels",
         completed: true
       },
-      {
-        title: "Smart Contract Development",
-        description: "Development and audit of $SCORP token smart contract",
-        completed: true
-      },
+     
       {
         title: "Community Building",
         description: "Initial community building and social media presence establishment",
         completed: true
       },
       {
+        title: "Smart Contract Development",
+        description: "Development and audit of $SCORP token smart contract",
+        completed: false
+      },
+      {
         title: "Token Presale",
         description: "Successful completion of private and public token sale rounds",
-        completed: true
+        completed: false
       }
     ]
   },
