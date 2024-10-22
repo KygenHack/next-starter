@@ -314,7 +314,7 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         {/* Description Component with proper spacing */}
-        <div className="mt-2 sm:mt-4">
+        <div className="mt-2 sm:mt-2">
           <AnimatedDescription />
         </div>
 
