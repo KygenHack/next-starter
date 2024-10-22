@@ -28,11 +28,15 @@ const roadmapData: RoadmapPhase[] = [
     icon: Rocket,
     milestones: [
       {
+        title: "GameFi Integration",
+        description: "Launch of Play-to-Earn gaming platform",
+        completed: true
+      },
+      {
         title: "Website Launch",
         description: "Launch of official Scorpion World website and social media channels",
         completed: true
       },
-     
       {
         title: "Community Building",
         description: "Initial community building and social media presence establishment",
@@ -54,14 +58,14 @@ const roadmapData: RoadmapPhase[] = [
     id: 2,
     title: "Growth Phase",
     emoji: "📈",
-    status: 'in-progress',
+    status: 'upcoming',
     period: "Q2 2024",
     icon: Target,
     milestones: [
       {
         title: "DEX Listing",
         description: "Listing on major decentralized exchanges",
-        completed: true
+        completed: false
       },
       {
         title: "Marketing Campaign",
@@ -118,11 +122,6 @@ const roadmapData: RoadmapPhase[] = [
     period: "Q4 2024",
     icon: Star,
     milestones: [
-      {
-        title: "GameFi Integration",
-        description: "Launch of Play-to-Earn gaming platform",
-        completed: false
-      },
       {
         title: "DeFi Suite",
         description: "Launch of comprehensive DeFi products suite",
