@@ -215,7 +215,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           Unleash the power of <span className="text-orange-400 font-semibold">$SCORP</span>.
-          Earn, trade, and dominate the crypto ecosystem with the most exciting meme coin in the market.
+          Earn, trade, and dominate the crypto ecosystem.
         </motion.p>
 
         {/* Smart Contract Section */}
@@ -276,15 +276,15 @@ const Hero: React.FC = () => {
           onHoverStart={() => setIsHovered(true)}
           onHoverEnd={() => setIsHovered(false)}
         >
-          <motion.a
+          {/* <motion.a
             href="#buy"
             className="inline-block w-[90%] sm:w-auto px-8 sm:px-12 py-4 sm:py-5 
               bg-gradient-to-r from-orange-500 to-orange-400 text-blue-950 text-lg sm:text-xl 
-              font-bold rounded-xl shadow-lg transition duration-300 transform 
+              font-bold rounded-lg shadow-lg transition duration-300 transform 
               hover:translate-y-[-2px] relative z-10"
           >
             Buy $SCORP Now
-          </motion.a>
+          </motion.a> */}
           <motion.div
             className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-600 
               rounded-xl opacity-75 group-hover:opacity-100 blur transition-duration-300 
@@ -292,7 +292,7 @@ const Hero: React.FC = () => {
             animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
           />
         </motion.div>
-        <motion.div
+        {/* <motion.div
           className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-[90%] 
             sm:w-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -302,7 +302,7 @@ const Hero: React.FC = () => {
           {socialLinks.map((link, index) => (
             <SocialLink key={index} {...link} />
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );
