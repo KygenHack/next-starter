@@ -1,9 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue, useTransform, MotionValue } from 'framer-motion';
+import { motion, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { Twitter, MessageCircle, Github, ExternalLink, Copy, CheckCircle, ArrowUpRight } from 'lucide-react';
 
+// Type Definitions
+type ChainKey = 'bsc' | 'solana' | 'ton';
+
+interface ChainData {
+  address: string;
+  name: string;
+  icon: string;
+}
+
+type ChainDataMap = {
+  [K in ChainKey]: ChainData;
+}
+
+interface SocialLink {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+}
+
+interface TabButtonProps {
+  chain: ChainKey;
+  isActive: boolean;
+  onClick: () => void;
+  chainData: ChainDataMap;
+}
+
+interface GlowingOrbProps {
+  delay: number;
+  size: number;
+  top: string;
+  left: string;
+}
+
+interface StatItem {
+  label: string;
+  value: string;
+}
+
+interface FeatureItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 // Background Pattern Component
-const BackgroundPattern = () => (
+const BackgroundPattern: React.FC = () => (
   <svg
     className="absolute w-full h-full opacity-20"
     xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +74,7 @@ const BackgroundPattern = () => (
 );
 
 // Border Beam Effect
-const BorderBeam = () => (
+const BorderBeam: React.FC = () => (
   <div className="absolute inset-0 pointer-events-none">
     <div className="absolute inset-x-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-50" />
     <div className="absolute inset-x-0 bottom-0 h-px w-full bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-50" />
@@ -40,12 +84,7 @@ const BorderBeam = () => (
 );
 
 // Glowing Orb Effect
-const GlowingOrb: React.FC<{
-  delay: number;
-  size: number;
-  top: string;
-  left: string;
-}> = ({ delay, size, top, left }) => (
+const GlowingOrb: React.FC<GlowingOrbProps> = ({ delay, size, top, left }) => (
   <motion.div
     className="absolute rounded-full blur-[100px] bg-orange-500/20"
     style={{ width: size, height: size, top, left }}
@@ -63,7 +102,7 @@ const GlowingOrb: React.FC<{
 );
 
 // Animated Particle
-const FloatingParticle = () => {
+const FloatingParticle: React.FC = () => {
   const randomPosition = () => ({
     x: `${Math.random() * 100}%`,
     y: `${Math.random() * 100}%`,
@@ -79,14 +118,8 @@ const FloatingParticle = () => {
         width: Math.random() * 4 + 2,
         height: Math.random() * 4 + 2,
       }}
-      initial={{
-        ...start,
-        opacity: 0,
-      }}
-      animate={{
-        ...end,
-        opacity: [0, 0.5, 0],
-      }}
+      initial={{ ...start, opacity: 0 }}
+      animate={{ ...end, opacity: [0, 0.5, 0] }}
       transition={{
         duration: Math.random() * 20 + 10,
         repeat: Infinity,
@@ -98,7 +131,7 @@ const FloatingParticle = () => {
 };
 
 // Particle System
-const ParticleSystem = () => (
+const ParticleSystem: React.FC = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {Array.from({ length: 30 }).map((_, index) => (
       <FloatingParticle key={index} />
@@ -107,13 +140,11 @@ const ParticleSystem = () => (
 );
 
 // Social Link Component
-const SocialLink: React.FC<{
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-}> = ({ href, icon, label }) => (
+const SocialLink: React.FC<SocialLink> = ({ href, icon, label }) => (
   <motion.a
     href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     className="group flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl
       bg-blue-900/20 hover:bg-blue-900/30 text-blue-100 hover:text-orange-400
       transition-all duration-300 backdrop-blur-sm border border-blue-800/30
@@ -135,6 +166,21 @@ const SocialLink: React.FC<{
   </motion.a>
 );
 
+// Tab Button Component
+const TabButton: React.FC<TabButtonProps> = ({ chain, isActive, onClick, chainData }) => (
+  <motion.button
+    onClick={onClick}
+    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
+      ${isActive 
+        ? 'bg-orange-500 text-blue-950' 
+        : 'bg-blue-900/20 text-blue-100 hover:bg-blue-900/40'}`}
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    {chainData[chain].icon} {chainData[chain].name}
+  </motion.button>
+);
+
 // Main Hero Component
 const Hero: React.FC = () => {
   const controls = useAnimation();
@@ -142,25 +188,79 @@ const Hero: React.FC = () => {
   const opacity = useTransform(y, [50, 0], [0, 1]);
   const [isHovered, setIsHovered] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [activeChain, setActiveChain] = useState<ChainKey>('bsc');
 
-  const smartContractAddress = "0x1234567890123456789012345678901234567890";
+  const chainData: ChainDataMap = {
+    bsc: {
+      address: "0x1234567890123456789012345678901234567890",
+      name: "BSC",
+      icon: "🟡"
+    },
+    solana: {
+      address: "CK23mTXMtqm8VzuN1B1dUZGwmgT5tqPEZsYs6pQeaU4N",
+      name: "Solana",
+      icon: "🟣"
+    },
+    ton: {
+      address: "EQBvW8Z5huBkMJYdnfAEM5JqTNkuWX3diqYENkWsIL0XggGG",
+      name: "TON",
+      icon: "💎"
+    }
+  };
+
+  const socialLinks: SocialLink[] = [
+    { 
+      href: "https://twitter.com/ScorpionWorld",
+      icon: <Twitter className="w-5 h-5" />,
+      label: "Twitter"
+    },
+    {
+      href: "https://t.me/ScorpionWorld",
+      icon: <MessageCircle className="w-5 h-5" />,
+      label: "Telegram"
+    },
+    {
+      href: "https://github.com/ScorpionWorld",
+      icon: <Github className="w-5 h-5" />,
+      label: "Github"
+    }
+  ];
+
+  const statsData: StatItem[] = [
+    { label: 'Total Supply', value: '1,000,000,000' },
+    { label: 'Holders', value: '2,547' },
+    { label: 'Market Cap', value: '$1.2M' },
+    { label: 'Liquidity', value: '$500K' }
+  ];
+
+  const featuresData: FeatureItem[] = [
+    {
+      icon: "🚀",
+      title: "Cross-Chain",
+      description: "Seamlessly operate across BSC, Solana, and TON networks"
+    },
+    {
+      icon: "💎",
+      title: "Community Driven",
+      description: "Strong community governance and collaborative development"
+    },
+    {
+      icon: "🔒",
+      title: "Security First",
+      description: "Audited smart contracts and secure infrastructure"
+    }
+  ];
 
   useEffect(() => {
     controls.start('visible');
   }, [controls]);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(smartContractAddress).then(() => {
+    navigator.clipboard.writeText(chainData[activeChain].address).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     });
   };
-
-  const socialLinks = [
-    { href: "#twitter", icon: <Twitter className="w-5 h-5" />, label: "Twitter" },
-    { href: "#telegram", icon: <MessageCircle className="w-5 h-5" />, label: "Telegram" },
-    { href: "#github", icon: <Github className="w-5 h-5" />, label: "Github" }
-  ];
 
   return (
     <div className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-slate-950">
@@ -215,7 +315,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           Unleash the power of <span className="text-orange-400 font-semibold">$SCORP</span>.
-          Earn, trade, and dominate the crypto ecosystem.
+          Earn, trade, and dominate the crypto and telegram ecosystem.
         </motion.p>
 
         {/* Smart Contract Section */}
@@ -227,29 +327,45 @@ const Hero: React.FC = () => {
         >
           <div className="bg-blue-900/20 backdrop-blur-xl p-4 sm:p-6 rounded-2xl 
             border border-blue-800/30">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-orange-400 font-bold text-sm sm:text-base flex items-center gap-2">
-                Smart Contract Address
-                <span className="text-blue-300 text-xs sm:text-sm font-normal px-2 py-1 
-                  rounded-full bg-blue-500/10">
-                  Verified ✓
-                </span>
-              </h3>
-            </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 
-              sm:gap-0 bg-blue-950/50 rounded-xl overflow-hidden border border-blue-800/30">
-              <input
-                type="text"
-                value={smartContractAddress}
-                readOnly
-                className="bg-transparent text-blue-100 p-3 outline-none text-xs sm:text-sm 
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-orange-400 font-bold text-sm sm:text-base flex items-center gap-2">
+                  Smart Contract Address
+                  <span className="text-blue-300 text-xs sm:text-sm font-normal px-2 py-1 
+                    rounded-full bg-blue-500/10">
+                    Verified ✓
+                  </span>
+                </h3>
+              </div>
+              
+              {/* Chain Selection Tabs */}
+              <div className="flex flex-wrap gap-2">
+                {(Object.keys(chainData) as ChainKey[]).map((chain) => (
+                  <TabButton
+                    key={chain}
+                    chain={chain}
+                    isActive={activeChain === chain}
+                    onClick={() => setActiveChain(chain)}
+                    chainData={chainData}
+                  />
+                ))}
+              </div>
+
+              {/* Address Display and Copy Button */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 
+                sm:gap-0 bg-blue-950/50 rounded-xl overflow-hidden border border-blue-800/30">
+                <input
+                  type="text"
+                  value={chainData[activeChain].address}
+                  readOnly
+                  className="bg-transparent text-blue-100 p-3 outline-none text-xs sm:text-sm 
                   font-mono w-full truncate"
               />
               <button
                 onClick={copyToClipboard}
                 className="flex items-center justify-center gap-2 bg-orange-500 text-blue-950 
                   px-4 py-3 font-bold hover:bg-orange-400 transition-colors duration-300 
-                  text-sm sm:text-base w-full sm:w-auto"
+                  text-sm sm:text-base w-full sm:w-auto whitespace-nowrap"
               >
                 {isCopied ? (
                   <>
@@ -265,47 +381,108 @@ const Hero: React.FC = () => {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* CTA Button */}
+      {/* Buy Button */}
+      <motion.div
+        className="relative group w-full sm:w-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+      >
+        <motion.a
+          href="#buy"
+          className="inline-block w-[90%] sm:w-auto px-8 sm:px-12 py-4 sm:py-5 
+            bg-gradient-to-r from-orange-500 to-orange-400 text-blue-950 text-lg sm:text-xl 
+            font-bold rounded-lg shadow-lg transition duration-300 transform 
+            hover:translate-y-[-2px] relative z-10"
+        >
+          Buy $SCORP Now
+        </motion.a>
         <motion.div
-          className="relative group w-full sm:w-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          onHoverStart={() => setIsHovered(true)}
-          onHoverEnd={() => setIsHovered(false)}
-        >
-          {/* <motion.a
-            href="#buy"
-            className="inline-block w-[90%] sm:w-auto px-8 sm:px-12 py-4 sm:py-5 
-              bg-gradient-to-r from-orange-500 to-orange-400 text-blue-950 text-lg sm:text-xl 
-              font-bold rounded-lg shadow-lg transition duration-300 transform 
-              hover:translate-y-[-2px] relative z-10"
+          className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-600 
+            rounded-xl opacity-75 group-hover:opacity-100 blur transition duration-300 
+            group-hover:duration-200"
+          animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+        />
+      </motion.div>
+
+      {/* Social Links
+      <motion.div
+        className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-[90%] 
+          sm:w-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+      >
+        {socialLinks.map((link, index) => (
+          <SocialLink key={index} {...link} />
+        ))}
+      </motion.div> */}
+
+      {/* Stats Section
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-[90%] sm:max-w-2xl mt-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+      >
+        {statsData.map((stat, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center p-4 rounded-xl
+              bg-blue-900/20 backdrop-blur-sm border border-blue-800/30"
           >
-            Buy $SCORP Now
-          </motion.a> */}
-          <motion.div
-            className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-600 
-              rounded-xl opacity-75 group-hover:opacity-100 blur transition-duration-300 
-              group-hover:duration-200"
-            animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
-          />
-        </motion.div>
-        {/* <motion.div
-          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-[90%] 
-            sm:w-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          {socialLinks.map((link, index) => (
-            <SocialLink key={index} {...link} />
-          ))}
-        </motion.div> */}
-      </div>
+            <span className="text-orange-400 font-bold text-lg sm:text-xl mb-1">
+              {stat.value}
+            </span>
+            <span className="text-blue-100/80 text-sm">
+              {stat.label}
+            </span>
+          </div>
+        ))}
+      </motion.div> */}
+
+      {/* Features Section
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-[90%] sm:max-w-4xl mt-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.4 }}
+      >
+        {featuresData.map((feature, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center p-6 rounded-xl
+              bg-blue-900/20 backdrop-blur-sm border border-blue-800/30
+              hover:border-orange-500/30 transition-colors duration-300"
+          >
+            <span className="text-4xl mb-4">{feature.icon}</span>
+            <h3 className="text-orange-400 font-bold text-lg mb-2">
+              {feature.title}
+            </h3>
+            <p className="text-blue-100/80 text-sm text-center">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </motion.div> */}
+
+      {/* Footer Note */}
+      <motion.p
+        className="text-blue-100/60 text-sm max-w-[90%] sm:max-w-2xl text-center mt-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.6 }}
+      >
+        $SCORP is a community-driven project. Always DYOR and invest responsibly.
+      </motion.p>
     </div>
-  );
+  </div>
+);
 };
 
 export default Hero;

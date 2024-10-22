@@ -295,7 +295,7 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* Stats Section */}
-        <StatsSection />
+        {/* <StatsSection /> */}
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
