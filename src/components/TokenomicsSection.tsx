@@ -42,6 +42,13 @@ const tokenomicsData: TokenomicsDataItem[] = [
     lockPeriod: 'Released per program'
   },
   { 
+    name: 'Marketing', 
+    value: 20, 
+    color: '#8B5CF6',
+    description: 'Reserved for marketing initiatives',
+    lockPeriod: '6 months vesting'
+  },
+  { 
     name: 'Liquidity Pool', 
     value: 10, 
     color: '#3B82F6', 
@@ -55,13 +62,6 @@ const tokenomicsData: TokenomicsDataItem[] = [
     description: 'Vested over 24 months',
     lockPeriod: '24 months vesting'
   },
-  { 
-    name: 'Marketing', 
-    value: 20, 
-    color: '#8B5CF6',
-    description: 'Reserved for marketing initiatives',
-    lockPeriod: '6 months vesting'
-  },
  
   { 
     name: 'Development', 
@@ -72,7 +72,7 @@ const tokenomicsData: TokenomicsDataItem[] = [
   },
 ];
 
-const totalSupply = 1000000000; // 1 billion $SCORP
+const totalSupply = 150000000; // 1 billion $SCORP
 
 const securityMeasures = [
   {
