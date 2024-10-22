@@ -329,7 +329,7 @@ const TokenomicsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Security Measures */}
+              {/* Security Measures
               <div className="mt-6 space-y-4">
                 {securityMeasures.map((section, index) => (
                   <div key={index} className="p-4 bg-blue-950/30 rounded-xl">
@@ -347,7 +347,7 @@ const TokenomicsSection: React.FC = () => {
                     </ul>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </motion.div>
 
@@ -385,10 +385,8 @@ const TokenomicsSection: React.FC = () => {
                   </div>
                 ))}
               </div>
-
-             
-
-              {/* Additional Info Box */}
+            </div>
+              {/* Additional Info Box
               <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
                 <div className="flex items-start gap-3">
                   <Sparkles className="w-5 h-5 text-orange-400 mt-1" />
@@ -410,8 +408,7 @@ const TokenomicsSection: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> */}
           </motion.div>
         </div>
 
