@@ -13,6 +13,7 @@ import {
   Rocket,
   FileText
 } from 'lucide-react';
+import WhitepaperComponent from './WhitepaperComponent';
 
 // Dynamic Background Shapes
 const BackgroundShapes = () => {
@@ -309,39 +310,12 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* CTA Section */}
-        <motion.div
-          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
+        <div
+          className="flex items-center justify-center mt-16"
         >
-          <motion.a
-            href="#"
-            className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r 
-              from-orange-500 to-orange-400 rounded-xl font-bold text-lg text-blue-950 
-              shadow-lg transition-all duration-300 hover:shadow-xl"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <FileText className="w-5 h-5" />
-            Read Our Whitepaper
-            <ChevronRight className="group-hover:translate-x-1 transition-transform duration-300" />
-          </motion.a>
+                  <WhitepaperComponent />
 
-          <motion.a
-            href="#"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl 
-              bg-blue-900/20 text-orange-400 border border-blue-800/30 
-              hover:border-orange-500/30 transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Lock className="w-5 h-5" />
-            View Audit Report
-            <ArrowUpRight className="group-hover:translate-x-1 
-              group-hover:-translate-y-1 transition-transform duration-300" />
-          </motion.a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
