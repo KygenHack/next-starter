@@ -289,7 +289,7 @@ const AboutSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Scorpion World is not just another meme coin – it's a revolution in the crypto space.
+            Scorpion World is a revolution in the crypto space.
             We combine the fun and excitement of meme culture with serious DeFi capabilities.
           </motion.p>
         </div>
