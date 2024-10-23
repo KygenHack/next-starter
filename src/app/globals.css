@@ -88,10 +88,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-
-[data-theme-id="tw-connect-wallet"] button {
-  min-width: 315px !important;
-  height: 62px !important;
-  font-size: 23px !important;
-}
