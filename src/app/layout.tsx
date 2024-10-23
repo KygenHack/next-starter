@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     "Starter template for using thirdweb SDK with Next.js App router",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
