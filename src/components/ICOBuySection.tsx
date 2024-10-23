@@ -276,7 +276,6 @@ function CustomWallets() {
 
   return (
       <div className="flex flex-col items-center mb-20 md:mb-20">
-          <p  className="text-zinc-300 text-base mb-4 md:mb-4">Log In or SignUp to Buy $SCORP Token</p>
           <ConnectButton
               client={client}
               //Display custom wallets
