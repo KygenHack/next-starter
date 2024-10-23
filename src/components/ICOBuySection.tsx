@@ -161,7 +161,7 @@ const BuyInterface: React.FC = () => {
               </div>
             </div>
             
-            <ConnecModalButton />
+            <CustomWallets />
           </div>
         ) : (
           // Connected State - Purchase Interface
@@ -283,9 +283,11 @@ function CustomWallets() {
               wallets={wallets}
               //Display recommended wallets
               recommendedWallets={recommendedWallets}
+              connectButton={{ label: "Connect Wallet" }}
               connectModal={{
                 size: "compact",
                 showThirdwebBranding: false,
+                
               }}
           />
 
