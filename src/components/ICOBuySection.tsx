@@ -6,7 +6,7 @@ import TypingAnimation from './ui/typing-animation';
 import { ConnectButton, MediaRenderer, darkTheme, useActiveAccount, useActiveWallet, useAutoConnect, useConnect, useConnectModal, useDisconnect } from "thirdweb/react";
 import { client } from '@/app/client';
 import { createWallet, inAppWallet } from "thirdweb/wallets";
-import { sepolia } from "thirdweb/chains";
+import { bscTestnet } from "thirdweb/chains";
 
 
 // Mock data
@@ -280,7 +280,7 @@ function CustomWallets() {
       <div className="flex flex-col items-center mb-20 md:mb-20">
           <ConnectButton
               client={client}
-              chain={sepolia}
+              chain={bscTestnet}
               //Display custom wallets
               wallets={wallets}
               //Display recommended wallets
